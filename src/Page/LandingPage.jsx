@@ -9,13 +9,11 @@ import DetailedPage from "../Page/DetailedPage"
 const LandingPage = () => {
   return (
     <>
-      <Header/>
-      <DetailedPage/>
-      {/* <Hero/> */}
-      {/* <AllProducts/> */}
-      {/* <TestAPI/> */}
+      <Hero/>
+      <AllProducts/>
       {/* <Cart/> */}
       {/* <CheckOutPage/> */}
+      {/* <DetailedPage/> */}
     </>
   )
 }

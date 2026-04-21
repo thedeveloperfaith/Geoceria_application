@@ -7,6 +7,9 @@
     width: 100%;
     height: 15vh;
     background-color:white;
+    position: sticky;
+    top: 0%;
+    bottom
 }
 .sub_Header{
     width: 90%;
@@ -15,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap:30px;
     /* background-color: lightgray; */
 }
 .left_Header{
@@ -38,7 +42,7 @@
     height: 100%;
 }
 .home{
-      padding: 16px 30px;
+  padding: 16px 30px;
   border-radius: 10px;
   border: 1px solid lightgray;
   background:#02B928;
@@ -51,7 +55,7 @@
   transition: 0.3s ease;
 }
 .store{
-      padding: 16px 30px;
+  padding: 16px 30px;
   border-radius: 10px;
   border: white;
   background:white;
@@ -72,7 +76,7 @@
     align-items: center;
 }
 .food{
-     width: 250px;
+    width: 250px;
     padding: 10px;
     border-radius: 4px;
     border: none;
@@ -82,7 +86,7 @@
     background-color: white;
 }
 .search{
-       padding: 10px 10px;
+  padding: 10px 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 1px solid lightgray;
@@ -100,7 +104,7 @@
     gap: 20px;
 }
 .register{
-         padding: 16px 30px;
+  padding: 16px 30px;
   border-radius: 20px;
   border: 1px solid lightgray;
   background: orange;
@@ -113,7 +117,7 @@
   transition: 0.3s ease;
 }
 .login{
-         padding: 16px 30px;
+  padding: 16px 30px;
   border-radius: 20px;
   border: 1px solid lightgray;
   background: #02B928;
@@ -125,3 +129,4 @@
   justify-content: center;
   transition: 0.3s ease;
 }
+

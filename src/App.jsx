@@ -1,9 +1,10 @@
 import React from 'react'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LandingPage from './Page/LandingPage'
 import Stores from './Page/Stores'
 import Header from './Components/Header'
-import TestAPI from './Components/TestAPI'
+// import TestAPI from './Components/TestAPI'
 import SignUp from './Page/SignUp'
 import Register from './Page/Register'
 import ErrorPage from './Page/ErrorPage'
