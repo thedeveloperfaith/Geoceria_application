@@ -9,7 +9,9 @@
     background-color:white;
     position: sticky;
     top: 0%;
-    bottom
+    bottom: 0%;
+    left: 0%;
+    z-index: 9999;
 }
 .sub_Header{
     width: 90%;
@@ -102,6 +104,25 @@
 .right_Header{
     display: flex;
     gap: 20px;
+    width: 30%;
+}
+
+.cart_Container{
+  position: relative;
+  display: inline-block;
+}
+.cart_Chart{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(45%, -45%);
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 50%;
+  line-height: 1;
 }
 .register{
   padding: 16px 30px;
@@ -130,3 +151,58 @@
   transition: 0.3s ease;
 }
 
+@media (max-width: 425px) {
+    .main_Header{
+        width: 100%;
+    }
+
+  .sub_Header {
+    width: 90%;
+    justify-content: space-between;
+    gap: 10px; 
+  }
+
+  .middle_Header {
+    width: 40%; 
+    justify-content: center; 
+    gap: 15px;
+  }
+
+  .middle_Buttons {
+    gap: 10px;
+  }
+
+  .middle_Input {
+    width: 100%;
+    max-width: 220px; 
+  }
+
+  .food {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .search {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .right_Header {
+    gap: 10px;
+  }
+
+  .home,
+  .register,
+  .login {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .store {
+    display: none;
+  }
+
+  .left_Header {
+    font-size: 16px;
+  }
+}

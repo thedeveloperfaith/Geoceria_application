@@ -1,70 +1,100 @@
-import React from 'react'
+import React from "react";
+import { FiPlus, FiMinus } from "react-icons/fi";
+import { TbCurrencyNaira } from "react-icons/tb";
+import Button from "../Components/Button";
 import "./Cart.css"
-import image from "../assets/asset 6 1.png"
+import { useContext } from "react";
+import { AppContext } from "../Context/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  return (
-    <div className='add_to_cart'>
-     <section className='not_close_to_the_edge'>
-        <div className='cart_container'>
-            <div className='header_and_list'> 
-                <div className='header_cart'>
-                    <h2> Your Cart(1 item)</h2>
-                </div>
-                <section className='header_paragraph'>
-                     <p>Product</p>
-                     <p>Unit Price</p>
-                     <p>Total</p>
-                     <p>Remove</p>
-               </section>
-           </div>
-       
-            <div className='card_box'>
-                <div className='card_content'>
-                    <div className='yam_picture_image' >
-                        <img src ={image} alt ="img"  />
-                    </div>
-                 
-                    <div className='yam_value'>
-                       <h3>Yam-Grade B</h3>
-                       <span>500kg</span>
-                    </div>
-                </div>
+    const nav =useNavigate();
+    const {cart, dispatch} = useContext(AppContext)
 
-                <div className='quantity_section'>
-                    <div className='qty'>
-                        <p>Quantity </p>
-                    </div>
+    const subTotalAmount = cart.reduce((acc , curr) => {
+        return acc + curr.price * curr.quantity ;
+    }, 0);
 
-                    <div className='Quantity_number'>
-                       <div className='minus'>-</div>
-                       <span className='number'>1</span>
-                       <div className='plus'>+</div>
-                    </div>
+    return (
+    <div className="wrapper">
+      <main className="mainCard">
+        <section className="menuLeft">
+          <header className="mainHead">
+            <h2>Your Cart ({cart.length} {cart.length <= 1?"item" : "items"})</h2>
+            <ul className="cartWrap">
+              <li>Product</li>
+              <li>Unit Price</li>
+              <li>Total</li>
+              <li>Remove</li>
+            </ul>
+          </header>
+          <div className="full_Cart">
+            {cart.length === 0?(
+                <h2>Your cart is empty</h2>
+            ) :( 
+                cart.map((item) => (
+                    <div className="all_Item" key={item.id}>
+          <article className="cartFormat">
 
-                    <div className='button_section'>
-                      <button className='more_items'>Add more items</button>
-                    </div>
-                </div>
 
-                <div className='price_section'>
-                    <p>#900:00</p>
-                    <p>#900:00</p>
-                    <button className='Remove'>Remove</button>
-                </div>
-
-                <div>
-                     <p>#900:00</p>
-                     <p>#900:00</p>
-                     <button className='Remove'>Remove</button>
-                </div>
-
+            <div className="imgWrap">
+            <img src={item.images?.[0]} alt={item.title} />
+              <section className="textWrap">
+                <p>{item.title}</p>
+                <span>{item.quantity}</span>
+              </section>
             </div>
-            
-        </div>
-     </section>
+            <p className="para">Quantity</p>
+            <section className="quantityWrap">
+              <div className="top" >
+                <FiPlus className="edit" onClick={() => dispatch ({type:  "ADD_QUANTITY", payload: item.id})} />
+                <span className="edit">{item.quantity}</span>
+                <FiMinus className="edit" onClick={() => dispatch ({type: "REMOVE_QUANTITY", payload: item.id})}/>
+              </div>
+              <nav className="side">
+                <span>
+                  <h3># {item.price}</h3>
+                </span>
+                <span>
+                 <h3># {item.price * item.quantity}</h3>
+                </span>
+                <Button className="wrap" name="Remove" onClick={() => dispatch ({type:  "REMOVE_QUANTITY", payload: item.id})}/>
+              </nav>
+            </section>
+            <div className="btnWrap">
+              <Button className="btnAdd" name="Add more items" />
+              <Button className="btnRemove" name="Remove" onClick= {() => dispatch({type: "REMOVE_FROM_CART", payload: item.id})} />
+            </div>
+          </article>
+          </div>
+          ))
+          )}
+         </div>
+        </section>
+        <aside className="menuRight">
+          <div className="centerEdit">
+            <section className="top">
+              <div className="wrappers">
+                <p>Subtotal:</p>
+                <p># {subTotalAmount.toFixed(2)}</p>
+              </div>
+              <div className="wrap">
+                <span>{cart.length} item(s)</span>
+              </div>
+              <aside className="bottom">
+                <input type="checkbox" />
+                <p>
+                  i have read the instruction above and i agree to{" "}
+                  <span>Groceria's Return Policy</span>{" "}
+                </p>
+              </aside>
+            </section>
+            <Button  onClick={() =>nav ("/checkout")} className="checkout_page" name="Proceed to checkout" />
+          </div>
+        </aside>
+      </main>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

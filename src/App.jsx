@@ -10,6 +10,7 @@ import Register from './Page/Register'
 import ErrorPage from './Page/ErrorPage'
 import DetailedPage from './Page/DetailedPage'
 import Cart from './Components/Cart'
+import CheckOutPage from './Components/CheckOutPage'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
      <Route path='/signup' element={<SignUp/>} /> 
       <Route path='/register' element={<Register/>} />
       <Route path='/cart' element={<Cart/>}/>
+      <Route path='/checkout' element={<CheckOutPage/>} />
     </Routes>
     </BrowserRouter>
     

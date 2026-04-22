@@ -26,8 +26,24 @@ const AppProvider = ({ children }) => {
         }
       }
 
-      case "REMOVE_FROM_CART":
+      case "REMOVE_FROM_CART": {
         return state.filter(item => item.id !== action.payload);
+      }
+      case "ADD_QUANTITY": {
+        return state.map((item) => {
+          return item.id === action.payload ? 
+          {...item, quantity: item.quantity + 1} : item;
+        });
+      }
+
+      case "REMOVE_QUANTITY": {
+        return state.map((item) => {
+          return item.id === action.payload ?
+          {...item, quantity: item.quantity > 1 ? item.quantity -1 : item.quantity} : item;
+        })
+        // .filter((item) => item.quantity > 0);
+      }
+
 
       default:
         return state;
