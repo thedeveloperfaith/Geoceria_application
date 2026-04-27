@@ -3,15 +3,21 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import { TbCurrencyNaira } from "react-icons/tb";
 import Button from "../Components/Button";
 import "./Cart.css"
-import { useContext } from "react";
-import { AppContext } from "../Context/AppProvider";
+// import { useContext } from "react";
+// import { AppContext } from "../Context/AppProvider";
 import { useNavigate } from "react-router-dom";
+import { useSelector , useDispatch } from "react-redux";
+import { decreaseOne, increaseOne, removeItem } from "../store/CartSlice";
+
 
 const Cart = () => {
     const nav =useNavigate();
-    const {cart, dispatch} = useContext(AppContext)
+    const dispatch = useDispatch();
+    // const {cart, dispatch} = useContext(AppContext)
+    const itemsInCart = useSelector ((state) =>state.cart );
+    // const cartItemInRedux = useSelector ((state) =>state.cart );
 
-    const subTotalAmount = cart.reduce((acc , curr) => {
+    const subTotalAmount = itemsInCart .reduce((acc , curr) => {
         return acc + curr.price * curr.quantity ;
     }, 0);
 
@@ -20,7 +26,7 @@ const Cart = () => {
       <main className="mainCard">
         <section className="menuLeft">
           <header className="mainHead">
-            <h2>Your Cart ({cart.length} {cart.length <= 1?"item" : "items"})</h2>
+            <h2>Your Cart ({ itemsInCart.length} {itemsInCart.length <= 1?"item" : "items"})</h2>
             <ul className="cartWrap">
               <li>Product</li>
               <li>Unit Price</li>
@@ -29,16 +35,16 @@ const Cart = () => {
             </ul>
           </header>
           <div className="full_Cart">
-            {cart.length === 0?(
+            { itemsInCart.length === 0?(
                 <h2>Your cart is empty</h2>
             ) :( 
-                cart.map((item) => (
+                itemsInCart.map((item) => (
                     <div className="all_Item" key={item.id}>
           <article className="cartFormat">
 
 
             <div className="imgWrap">
-            <img src={item.images?.[0]} alt={item.title} />
+            <img src={item.image || item.images?.[0]} alt={item.title} />
               <section className="textWrap">
                 <p>{item.title}</p>
                 <span>{item.quantity}</span>
@@ -47,9 +53,12 @@ const Cart = () => {
             <p className="para">Quantity</p>
             <section className="quantityWrap">
               <div className="top" >
-                <FiPlus className="edit" onClick={() => dispatch ({type:  "ADD_QUANTITY", payload: item.id})} />
+                {/* <FiPlus className="edit" onClick={() => dispatch ({type:  "ADD_QUANTITY", payload: item.id})} /> */}
+                 <FiPlus className="edit" onClick={() => dispatch (increaseOne(item.id))} />
                 <span className="edit">{item.quantity}</span>
-                <FiMinus className="edit" onClick={() => dispatch ({type: "REMOVE_QUANTITY", payload: item.id})}/>
+                 <FiMinus className="edit" onClick={() => dispatch (decreaseOne(item.id))} />
+
+                {/* <FiMinus className="edit" onClick={() => dispatch ({type: "REMOVE_QUANTITY", payload: item.id})}/> */}
               </div>
               <nav className="side">
                 <span>
@@ -58,12 +67,14 @@ const Cart = () => {
                 <span>
                  <h3># {item.price * item.quantity}</h3>
                 </span>
-                <Button className="wrap" name="Remove" onClick={() => dispatch ({type:  "REMOVE_QUANTITY", payload: item.id})}/>
+                <Button className="wrap" name="Remove" onClick={() => dispatch (removeItem(item.id))}/>
+                {/* <Button className="wrap" name="Remove" onClick={() => dispatch ({type:  "REMOVE_QUANTITY", payload: item.id})}/> */}
               </nav>
             </section>
             <div className="btnWrap">
               <Button className="btnAdd" name="Add more items" />
-              <Button className="btnRemove" name="Remove" onClick= {() => dispatch({type: "REMOVE_FROM_CART", payload: item.id})} />
+              <Button className="wrap" name="Remove" onClick={() => dispatch (removeItem(item.id))}/>
+              {/* <Button className="btnRemove" name="Remove" onClick= {() => dispatch({type: "REMOVE_FROM_CART", payload: item.id})} /> */}
             </div>
           </article>
           </div>
@@ -79,7 +90,7 @@ const Cart = () => {
                 <p># {subTotalAmount.toFixed(2)}</p>
               </div>
               <div className="wrap">
-                <span>{cart.length} item(s)</span>
+                <span>{ itemsInCart .length} item(s)</span>
               </div>
               <aside className="bottom">
                 <input type="checkbox" />

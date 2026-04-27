@@ -50,10 +50,8 @@ const AppProvider = ({ children }) => {
   if (itemsInCart) {
     try {
       initialValue= JSON.parse(itemsInCart);
-      console.log("Cart Loaded", initialValue)
     } catch (error) {
       initialValue =[];
-      console.log( "No Cart Data",error)
     }
   }
   const [cart, dispatch] = useReducer(cartReducer, initialValue);
@@ -62,8 +60,8 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("cart" , JSON.stringify(cart));
   },[cart]);
 
-  console.log("cart from storage:" , itemsInCart)
 
+  
   return (
     <AppContext.Provider value={{ cart, dispatch }}>
       {children}

@@ -11,7 +11,7 @@ const LandingPage = () => {
     <>
       <Hero/>
       <AllProducts/>
-      {/* <Cart/> */}
+      <Cart/>
       <CheckOutPage/>
       {/* <DetailedPage/> */}
     </>

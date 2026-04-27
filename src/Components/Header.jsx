@@ -4,10 +4,13 @@ import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 import { BsCart2 } from "react-icons/bs";
 import { AppContext } from '../Context/AppProvider.jsx';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const navigate = useNavigate();
   const { cart } = useContext(AppContext);
+  const cartItems = useSelector ((state) => state.cart);
+
   return (
     <header className='main_Header'>
       <section className='sub_Header'>
@@ -27,7 +30,7 @@ const Header = () => {
         <div className='right_Header'>
           <div onClick={() => navigate("/cart")}>
             <BsCart2 size={40} color='green' cursor="pointer"/>
-            <span className='cart_Number'>{cart.length}</span>
+            <span className='cart_Number'>{cartItems.length}</span>
           </div>
             <Button onclick={() => navigate ("/register")} name="Register" className="register"/>
             <Button onclick={() => navigate ("/signUp")} name="Login" className="login"/>
